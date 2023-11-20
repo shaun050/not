@@ -11,6 +11,17 @@ const flash = require("connect-flash");
 const app = express();
 const port = process.env.PORT || 5000;
 
+mongoose.set('strictQuery', false);
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.MONGO_URI);
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
+  } catch (error) {
+    console.log(error);
+    process.exit(1);
+  }
+}
+
 
 //connect to Database
 connectDB();
